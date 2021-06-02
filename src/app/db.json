@@ -1,0 +1,24 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "json-server",
+      "detail": "typicode"
+    },
+    {
+      "name": "haitt",
+      "detail": "haittqrwrwdasd",
+      "id": 2
+    },
+    {
+      "name": "haitt",
+      "detail": "293472938ruhwery823",
+      "id": 3
+    },
+    {
+      "id": 4,
+      "name": "Đỗ Huỳnh Ngọc Thế",
+      "detail": "`2334564wr23ẩdasdas"
+    }
+  ]
+}

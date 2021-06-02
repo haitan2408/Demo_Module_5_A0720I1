@@ -20,6 +20,7 @@ import { EditProductComponent } from './component/product/edit-product/edit-prod
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule
   ],
   providers: [],

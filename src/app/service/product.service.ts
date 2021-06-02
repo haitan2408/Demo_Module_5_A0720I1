@@ -8,39 +8,29 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ProductService {
 
-  private listProduct: Product[] = [
-    {id: 1, name: "Iphone", detail: "iphone vip"},
-    {id: 2, name: "SamSung", detail: "iphone vip"},
-    {id: 3, name: "Oppo", detail: "iphone vip"},
-  ]
+  private url = 'http://localhost:3000'
 
-  constructor() {
+  constructor(private httpClient: HttpClient) {
   }
 
-  getAllProduct(): Product[] {
-    return this.listProduct;
+  getAllProduct(): Observable<any> {
+    return this.httpClient.get(this.url + "/products");
   }
 
-  createProduct(product: Product) {
-    if (this.listProduct.length == 0) {
-      product.id = 1;
-    } else {
-      product.id = this.listProduct[this.listProduct.length - 1].id + 1;
-    }
+  createProduct(product: Product): Observable<any> {
     // @ts-ignore
-    return this.listProduct.push(product)
+    return this.httpClient.post(this.url + "/products", product);
   }
 
-  getById(id: number): Product {
-    return this.listProduct[id - 1];
+  getById(id: number): Observable<any> {
+    return this.httpClient.get(this.url + "/products/" + id);
   }
 
-  editProduct(product: Product, id: number) {
-    for (let i = 0; i < this.listProduct.length; i++) {
-      if(this.listProduct[i].id == id) {
-        this.listProduct[i] = product;
-      }
-    }
-      }
+  editProduct(product: Product, id: number): Observable<any> {
+    return this.httpClient.put(this.url + "/products/" + id, product)
+  }
 
+  searchProduct(search: string): Observable<any> {
+    return this.httpClient.get(this.url + "/products?name_like=" + search)
+  }
 }

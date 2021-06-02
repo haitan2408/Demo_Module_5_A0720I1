@@ -9,6 +9,7 @@ import {ProductService} from "../../../service/product.service";
 })
 export class ListProductComponent implements OnInit {
   listProduct: Product[] = [];
+  search = "";
 
   constructor(private productService: ProductService) {
   }
@@ -18,8 +19,15 @@ export class ListProductComponent implements OnInit {
   }
 
   initDataListProduct() {
-    this.listProduct = this.productService.getAllProduct();
-    console.log(this.listProduct)
+    this.productService.getAllProduct().subscribe(data => {
+      this.listProduct = data;
+      console.log(this.listProduct)
+    })
   }
 
+  searchProduct() {
+    this.productService.searchProduct(this.search).subscribe(data => {
+      this.listProduct = data;
+    })
+  }
 }

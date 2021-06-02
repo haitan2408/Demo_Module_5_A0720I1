@@ -27,8 +27,10 @@ export class CreateProductComponent implements OnInit {
 
   createProduct() {
     if(this.formCreate.valid) {
-      this.productService.createProduct(this.formCreate.value);
-      this.router.navigateByUrl("/");
+      this.productService.createProduct(this.formCreate.value).subscribe(data=> {
+        this.router.navigateByUrl("/");
+      });
+
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ProductService} from "../../../service/product.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -19,7 +19,9 @@ export class EditProductComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params["id"];
     this.initForm();
-    this.formCreate.patchValue(this.productService.getById(this.id));
+    this.productService.getById(this.id).subscribe(data => {
+      this.formCreate.patchValue(data);
+    });
   }
 
   initForm() {
@@ -31,9 +33,11 @@ export class EditProductComponent implements OnInit {
   }
 
   editProduct() {
-    if(this.formCreate.valid) {
-      this.productService.editProduct(this.formCreate.value, this.id);
-      this.router.navigateByUrl("/")
+    if (this.formCreate.valid) {
+      this.productService.editProduct(this.formCreate.value, this.id).subscribe(data=> {
+        this.router.navigateByUrl("/")
+      });
+
     }
   }
 
